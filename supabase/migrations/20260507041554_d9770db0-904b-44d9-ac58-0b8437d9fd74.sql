@@ -1,0 +1,1 @@
+drop policy if exists "Authenticated users can view submissions" on public.contact_submissions;

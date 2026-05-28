@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#lovable-badge { display: none !important; }
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 33% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 33% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 33% 10%;
+
+    --primary: 189 95% 42%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 262 83% 60%;
+
+    --secondary: 240 20% 96%;
+    --secondary-foreground: 240 33% 10%;
+
+    --muted: 240 20% 96%;
+    --muted-foreground: 240 10% 40%;
+
+    --accent: 262 83% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 15% 88%;
+    --input: 240 15% 92%;
+    --ring: 189 95% 42%;
+
+    --radius: 1rem;
+
+    --gradient-primary: linear-gradient(135deg, hsl(189 95% 42%), hsl(262 83% 60%));
+    --gradient-text: linear-gradient(135deg, #00B8D9, #7C3AED);
+    --gradient-mesh: radial-gradient(at 20% 20%, hsl(189 95% 42% / 0.12) 0px, transparent 50%),
+                     radial-gradient(at 80% 0%, hsl(262 83% 60% / 0.12) 0px, transparent 50%),
+                     radial-gradient(at 80% 80%, hsl(220 95% 60% / 0.10) 0px, transparent 50%);
+
+    --shadow-elegant: 0 20px 60px -20px hsl(189 95% 42% / 0.25);
+    --shadow-soft: 0 10px 40px -10px hsl(262 83% 60% / 0.18);
+    --shadow-glow: 0 0 80px hsl(189 95% 42% / 0.3);
+    --neon-cyan: 0 0 20px hsl(189 95% 42% / 0.35), 0 0 40px hsl(189 95% 42% / 0.18);
+    --neon-purple: 0 0 20px hsl(262 83% 60% / 0.35), 0 0 40px hsl(262 83% 60% / 0.18);
+  }
+}
+
+@layer base {
+  * { border-color: hsl(var(--border)); }
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-color: #ffffff;
+  }
+  html { scroll-behavior: smooth; }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #f3f4f8; }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00B8D9, #7C3AED);
+    border-radius: 10px;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .bg-mesh { background-image: var(--gradient-mesh); }
+  .glass {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 184, 217, 0.18);
+    box-shadow: 0 4px 20px -8px rgba(15, 23, 42, 0.08);
+  }
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    box-shadow: 0 8px 30px -10px rgba(15, 23, 42, 0.1);
+  }
+  .grid-overlay {
+    background-image:
+      linear-gradient(rgba(0, 184, 217, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 184, 217, 0.08) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .neon-border-cyan { box-shadow: var(--neon-cyan); }
+  .neon-border-purple { box-shadow: var(--neon-purple); }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(0,184,217,0.3), 0 0 40px rgba(124,58,237,0.15); }
+    50% { box-shadow: 0 0 35px rgba(0,184,217,0.5), 0 0 70px rgba(124,58,237,0.3); }
+  }
+  .pulse-glow { animation: pulse-glow 2.4s ease-in-out infinite; }
+
+  @keyframes drift-up {
+    0% { transform: translateY(110vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
+  }
+  .binary-digit {
+    position: absolute;
+    color: rgba(0, 184, 217, 0.35);
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    animation: drift-up linear infinite;
+    pointer-events: none;
+    text-shadow: 0 0 8px rgba(0, 184, 217, 0.4);
+  }
+
+  .flip-card { perspective: 1200px; }
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+  .flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .flip-back { transform: rotateY(180deg); }
+}
